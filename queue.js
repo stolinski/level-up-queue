@@ -122,6 +122,9 @@ if (Meteor.isClient) {
             return Session.get('editMode');
         }
     });
+    Accounts.config({
+        forbidClientAccountCreation : true
+    });
 }
 
 if (Meteor.isServer) {
@@ -160,5 +163,4 @@ Meteor.methods({
     updateVideoCheck: function(videoId, setChecked) {
         Video.update(videoId, { $set: { checked: setChecked} });
     }
-
 });
