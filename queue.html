@@ -1,0 +1,85 @@
+<head>
+    <title>Level Up Queue</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <svg class="edit-toggle {{#if editMode}}open{{/if}}" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><path d="M38.86 25.95c.08-.64.14-1.29.14-1.95s-.06-1.31-.14-1.95l4.23-3.31c.38-.3.49-.84.24-1.28l-4-6.93c-.25-.43-.77-.61-1.22-.43l-4.98 2.01c-1.03-.79-2.16-1.46-3.38-1.97L29 4.84c-.09-.47-.5-.84-1-.84h-8c-.5 0-.91.37-.99.84l-.75 5.3c-1.22.51-2.35 1.17-3.38 1.97L9.9 10.1c-.45-.17-.97 0-1.22.43l-4 6.93c-.25.43-.14.97.24 1.28l4.22 3.31C9.06 22.69 9 23.34 9 24s.06 1.31.14 1.95l-4.22 3.31c-.38.3-.49.84-.24 1.28l4 6.93c.25.43.77.61 1.22.43l4.98-2.01c1.03.79 2.16 1.46 3.38 1.97l.75 5.3c.08.47.49.84.99.84h8c.5 0 .91-.37.99-.84l.75-5.3c1.22-.51 2.35-1.17 3.38-1.97l4.98 2.01c.45.17.97 0 1.22-.43l4-6.93c.25-.43.14-.97-.24-1.28l-4.22-3.31zM24 31c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+
+    <div class="wrapper {{forms}}">
+        <div class="forms">
+
+            <form class="new-course">
+                <h3>New Course</h3>
+                <input id="title" class="form-title" type="text" name="title" placeholder="Course Title" required/>
+                <br />
+                <input class="inverted" type="submit" value="Submit">
+            </form>
+
+            <form class="new-video">
+                <h3>New Video</h3>
+                <input id="title" class="form-title" type="text" name="title" placeholder="Video Title" required/><br />
+                <select name="course" id="course">
+                    {{#each courses}}
+                        <option value="{{title}}">{{title}}</option>
+                    {{/each}}
+                </select><br />
+                <input class="inverted" type="submit" value="Submit">
+            </form>
+
+        </div>
+
+        <div class="container">
+
+            <svg id="form-toggle" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+                <path d="M14.83 30.83l9.17-9.17 9.17 9.17 2.83-2.83-12-12-12 12z"/>
+            </svg>
+
+
+            <nav>
+                <ul>
+                {{#each courses}}
+                    <li>{{> course}}</li>
+                {{/each}}
+                </ul>
+            </nav>
+
+            <main>
+                <div class="course-details">
+                    <h2>{{current.title}}</h2>
+                    <p>
+                        {{#if complete}}{{complete}} / {{/if}}{{inCourse}} videos {{#if complete}}completed{{/if}}
+                    </p>
+                </div>
+
+                <ul id="items">
+                    {{#each videos}}
+                        {{> video}}
+                    {{/each}}
+                </ul>
+
+            </main>
+            {{> loginButtons}}
+        </div>
+    </div>
+</body>
+
+<template name="video">
+    <li class="item {{#if checked}}checked{{/if}}">
+        <span class="drag"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve"><path id="reorder" d="M3,15h18v-2H3V15z M3,19h18v-2H3V19z M3,11h18V9H3V11z M3,5v2h18V5H3z"/></svg></span>
+        <span class="title">{{title}} - {{order}}</span>
+        {{#if editMode}}
+            <span class="edit-video">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+            </span>
+            <span class="delete-video">X</span>
+        {{else}}
+            <input id="{{title}}" type="checkbox" checked="{{checked}}" class="toggle-checked" /><label for="{{title}}"></label>
+        {{/if}}
+    </li>
+</template>
+
+
+<template name="course">
+    <button class="set-course">{{title}}</button>
+</template>

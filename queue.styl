@@ -1,0 +1,242 @@
+@import 'nib'
+
+bg = #111
+white = #ecf0f1
+red = #e74c3c
+
+drawer-height = 275px
+
+neg(val)
+    val * -1
+
+roboto()
+  font-family 'Roboto', sans-serif
+
+html
+  box-sizing border-box
+
+*, *:before, *:after
+  box-sizing inherit
+
+body
+    background bg
+    color white
+    padding 0
+    margin 0
+    roboto()
+
+.edit-toggle
+    position fixed
+    bottom 10px
+    left 10px
+    transition all 0.2s ease
+    path
+        transition all 0.2s ease
+        fill white
+    &.open
+        transform rotate(45deg)
+        path
+            fill red
+
+
+.wrapper
+    transform translateY(neg(drawer-height))
+    transition all 0.2s ease
+    &.open
+        transform translateY(0)
+
+.forms
+    padding 20px
+    height drawer-height
+    background white
+    color bg
+    box-shadow 0 -2px 4px rgba(black, 0.5) inset
+    display flex
+    justify-content space-around
+        input[type=submit]
+            margin-top 30px
+
+.new-course
+    margin-bottom 20px
+    margin-right 60px
+
+nav
+    padding 20px
+    display none
+    ul
+        margin 0
+        padding 0
+        list-style none
+        clearfix()
+        li
+            float left
+            margin 0 10px 10px 0
+    +above(600px)
+        display block
+
+button, input[type=submit]
+    roboto()
+    -webkit-appearance none
+    background transparent
+    color white
+    border solid 2px @color
+    padding 8px 20px
+    outline none
+    font-size 1.4rem
+    transition all 0.2s ease
+    cursor pointer
+    &:hover
+        background white
+        color bg
+    &.inverted
+        box-shadow 1px 1px 3px rgba(black, 0.3)
+        color bg
+        border-color @color
+        &:hover
+            background bg
+            color white
+
+input[type=text], select
+    font-size 1.4rem
+    padding 8px
+    background white
+    box-shadow none
+    border none
+    border-bottom 2px solid white - 40
+    margin-right 20px
+    margin-bottom: 20px;
+
+input[type="checkbox"]
+    display none
+    &:checked + label:after
+        display: block;
+        cursor pointer
+        content: url('/done.svg')
+        position: absolute;
+        left: 12px;
+        top: 6px;
+    & + label
+        position relative
+        &:before
+            cursor pointer
+            content: '';
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            border-radius: 0%;
+            vertical-align: middle;
+            border: 4px solid white;
+            margin-left: 1rem;
+
+
+
+select
+    -webkit-appearance none
+    border-radius 0
+    background white
+    border solid 1px white - 40
+
+
+.container
+    padding-right 90px
+    position relative
+    min-height 300px
+
+#form-toggle
+    position absolute
+    right 20px
+    top @right
+    width 60px
+    height @width
+    transition all 0.2s ease
+    path
+        fill white
+
+.open #form-toggle
+    transform rotate(180deg)
+
+
+.course-details
+    h2
+        text-transform uppercase
+        text-align center
+    p
+        font-size 1.6rem
+    +above(800px)
+        float left
+        margin-left 20px
+
+#items
+    list-style none
+    text-align right
+    li
+        font-size 1.6rem
+        .drag
+            overflow hidden
+            position relative
+            display inline-block
+            width 40px
+            height @width
+            cursor grab
+            cursor -webkit-grab
+            cursor -moz-grab
+        svg
+            position absolute
+            width 40px
+            height @width
+            right -100%
+            transition all 0.2s ease
+            opacity 0
+        .title
+            position relative
+            transition all 0.6s ease
+            transition-delay 0.6s
+            &:after
+                content ''
+                transition all 0.6s ease
+                width 0%
+                right 0
+                top 50%
+                background red
+                position absolute
+                height 4px
+        &.checked
+            .title
+                opacity 0.5
+                &:after
+                    width 100%
+    &:hover
+        li
+            svg
+                right 0
+                opacity 1
+    +above(600px)
+        li
+            font-size 2rem
+    +above(800px)
+        li
+            font-size 3rem
+    +above(1000px)
+        li
+            font-size 4rem
+
+
+#reorder
+    fill white
+
+
+// Edit Mode
+.delete-video
+    font-size 30px
+    padding 10px 20px
+    background red
+    color black
+    font-weight bold
+    position relative
+    top -8px
+
+
+// hide login
+#login-buttons
+    display none
