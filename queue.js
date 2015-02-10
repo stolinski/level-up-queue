@@ -136,6 +136,10 @@ if (Meteor.isServer) {
 Meteor.methods({
 
     addCourse: function(title) {
+        // Make sure the user is logged in before inserting a task
+        if (! Meteor.userId()) {
+          throw new Meteor.Error("not-authorized");
+        }
         Course.insert({
             title: title,
             createdAt: new Date()
@@ -143,6 +147,10 @@ Meteor.methods({
     },
 
     addVideo: function(title, course, order) {
+        // Make sure the user is logged in before inserting a task
+        if (! Meteor.userId()) {
+          throw new Meteor.Error("not-authorized");
+        }
         Video.insert({
             title: title,
             course: course,
@@ -153,14 +161,26 @@ Meteor.methods({
     },
 
     deleteVideo: function(videoId) {
+        // Make sure the user is logged in before inserting a task
+        if (! Meteor.userId()) {
+          throw new Meteor.Error("not-authorized");
+        }
         Video.remove(videoId);
     },
 
     updateVideoRank: function(videoId, newRank) {
+        // Make sure the user is logged in before inserting a task
+        if (! Meteor.userId()) {
+          throw new Meteor.Error("not-authorized");
+        }
         Video.update(videoId, { $set: { order: newRank} });
     },
 
     updateVideoCheck: function(videoId, setChecked) {
+        // Make sure the user is logged in before inserting a task
+        if (! Meteor.userId()) {
+          throw new Meteor.Error("not-authorized");
+        }
         Video.update(videoId, { $set: { checked: setChecked} });
     }
 });
