@@ -50,8 +50,8 @@ if (Meteor.isClient) {
 
             // Finds highest video ranking to add to end
             var prev = Video.findOne({course:course}, {sort: {order: -1}});
-
-            Meteor.call('addVideo', title, course, prev.order + 1);
+            var order = prev ? prev.order + 1 : 1;
+            Meteor.call('addVideo', title, course, order);
 
             // Clear form
             event.target.title.value = '';
@@ -70,6 +70,10 @@ if (Meteor.isClient) {
             } else {
                 Session.set('editMode', true);
             }
+        },
+        'change #course-menu': function(event) {
+            var courseChange = Course.findOne({title: event.target.value});
+            Session.set('current', courseChange);
         }
     });
 
@@ -137,8 +141,8 @@ Meteor.methods({
 
     addCourse: function(title) {
         // Make sure the user is logged in before inserting a task
-        if (! Meteor.userId()) {
-          throw new Meteor.Error("not-authorized");
+        if (!Meteor.userId()) {
+            throw new Meteor.Error('not-authorized');
         }
         Course.insert({
             title: title,
@@ -148,8 +152,8 @@ Meteor.methods({
 
     addVideo: function(title, course, order) {
         // Make sure the user is logged in before inserting a task
-        if (! Meteor.userId()) {
-          throw new Meteor.Error("not-authorized");
+        if (!Meteor.userId()) {
+            throw new Meteor.Error('not-authorized');
         }
         Video.insert({
             title: title,
@@ -162,24 +166,24 @@ Meteor.methods({
 
     deleteVideo: function(videoId) {
         // Make sure the user is logged in before inserting a task
-        if (! Meteor.userId()) {
-          throw new Meteor.Error("not-authorized");
+        if (!Meteor.userId()) {
+            throw new Meteor.Error('not-authorized');
         }
         Video.remove(videoId);
     },
 
     updateVideoRank: function(videoId, newRank) {
         // Make sure the user is logged in before inserting a task
-        if (! Meteor.userId()) {
-          throw new Meteor.Error("not-authorized");
+        if (!Meteor.userId()) {
+            throw new Meteor.Error('not-authorized');
         }
         Video.update(videoId, { $set: { order: newRank} });
     },
 
     updateVideoCheck: function(videoId, setChecked) {
         // Make sure the user is logged in before inserting a task
-        if (! Meteor.userId()) {
-          throw new Meteor.Error("not-authorized");
+        if (!Meteor.userId()) {
+            throw new Meteor.Error('not-authorized');
         }
         Video.update(videoId, { $set: { checked: setChecked} });
     }

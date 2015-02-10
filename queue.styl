@@ -4,7 +4,10 @@ bg = #111
 white = #ecf0f1
 red = #e74c3c
 
+
 drawer-height = 275px
+
+med = 600px
 
 neg(val)
     val * -1
@@ -40,30 +43,33 @@ body
 
 
 .wrapper
-    transform translateY(neg(drawer-height))
     transition all 0.2s ease
-    &.open
-        transform translateY(0)
+    +above(med)
+        transform translateY(neg(drawer-height))
+        &.open
+            transform translateY(0)
 
 .forms
+    display none
+    position fixed
     padding 20px
     height drawer-height
     background white
     color bg
     box-shadow 0 -2px 4px rgba(black, 0.5) inset
-    display flex
-    justify-content space-around
-        input[type=submit]
-            margin-top 30px
+    input[type=submit]
+        margin-top 30px
+    +above(med)
+        position static
+        display block
 
 .new-course
     margin-bottom 20px
     margin-right 60px
 
 nav
-    padding 20px
-    display none
     ul
+        display none
         margin 0
         padding 0
         list-style none
@@ -71,8 +77,17 @@ nav
         li
             float left
             margin 0 10px 10px 0
-    +above(600px)
+    select
+        margin 0
+        width 100%
+        text-align center
+    +above(med)
+        padding 20px
         display block
+        select
+            display none
+        ul
+            display block
 
 button, input[type=submit]
     roboto()
@@ -139,9 +154,12 @@ select
 
 
 .container
-    padding-right 90px
+    padding 20px
     position relative
     min-height 300px
+    +above(med)
+        padding 0
+        padding-right 90px
 
 #form-toggle
     position absolute
@@ -158,6 +176,7 @@ select
 
 
 .course-details
+    animation: play 2s;
     h2
         text-transform uppercase
         text-align center
@@ -167,11 +186,19 @@ select
         float left
         margin-left 20px
 
+@keyframes play
+    from
+        opacity 0
+    to
+        opacity 1
+
+
 #items
     list-style none
     text-align right
+    padding 0
     li
-        font-size 1.6rem
+        font-size 1rem
         .drag
             overflow hidden
             position relative
@@ -211,7 +238,7 @@ select
             svg
                 right 0
                 opacity 1
-    +above(600px)
+    +above(med)
         li
             font-size 2rem
     +above(800px)
@@ -240,3 +267,7 @@ select
 // hide login
 // #login-buttons
 //     display none
+.login-buttons-dropdown-align-
+    position: absolute;
+    bottom: 0;
+    right: 20px;
