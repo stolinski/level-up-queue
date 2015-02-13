@@ -3,6 +3,7 @@ accounts-password@1.0.6
 accounts-ui@1.1.4
 accounts-ui-unstyled@1.1.6
 amplify@1.0.0
+appcache@1.0.3
 application-configuration@1.0.4
 autopublish@1.0.2
 autoupdate@1.1.5
@@ -14,7 +15,7 @@ boilerplate-generator@1.0.2
 callback-hook@1.0.2
 check@1.0.4
 coffeescript@1.0.5
-cryptoquick:stylus-multi@1.2.0
+cryptoquick:stylus-multi@1.2.1
 ddp@1.0.14
 deps@1.0.6
 ejson@1.0.5

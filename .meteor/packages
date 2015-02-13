@@ -13,3 +13,5 @@ accounts-password
 accounts-ui
 xolvio:cucumber
 iron:router
+appcache
+fastclick
