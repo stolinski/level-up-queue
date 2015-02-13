@@ -1,3 +1,16 @@
+Router.map(function () {
+    this.route('home', {path: '/'} );
+    this.route('logout', {
+        path: '/logout',
+        onBeforeAction: function (pause) {
+            Meteor.logout(function(err) {
+                Router.go('/');
+            });
+            this.next();
+        }
+    });
+});
+
 Course = new Mongo.Collection('course');
 Video = new Mongo.Collection('video');
 
@@ -9,7 +22,7 @@ if (Meteor.isClient) {
         Session.set('editMode', false);
     });
 
-    Template.body.helpers({
+    Template.home.helpers({
         courses: function() {
             return Course.find();
         },
@@ -20,7 +33,7 @@ if (Meteor.isClient) {
             return Video.find({course: Session.get('current').title}).count();
         },
         complete: function() {
-            return Video.find({course: Session.get('current').title, checked: true}).count();;
+            return Video.find({course: Session.get('current').title, checked: true}).count();
         },
         current: function() {
             return Session.get('current');
@@ -33,7 +46,7 @@ if (Meteor.isClient) {
         }
     });
 
-    Template.body.events({
+    Template.home.events({
         'submit .new-course': function(event) {
 
             var title = event.target.title.value;
@@ -77,7 +90,7 @@ if (Meteor.isClient) {
         }
     });
 
-    Template.body.rendered = function() {
+    Template.home.rendered = function() {
         this.$('#items').sortable({
             axis: 'y',
             stop: function(e, ui) {;
@@ -126,6 +139,7 @@ if (Meteor.isClient) {
             return Session.get('editMode');
         }
     });
+
     Accounts.config({
         forbidClientAccountCreation : true
     });
