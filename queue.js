@@ -2,6 +2,8 @@ Course = new Mongo.Collection('course');
 Video = new Mongo.Collection('video');
 
 if (Meteor.isClient) {
+    Meteor.subscribe('course');
+    Meteor.subscribe('video');
 
     Meteor.startup(function() {
         Session.set('current', Course.findOne());
@@ -18,6 +20,14 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
     Meteor.startup(function() {
 
+    });
+
+    Meteor.publish('course', function () {
+        return Course.find();
+    });
+
+    Meteor.publish('video', function () {
+        return Video.find();
     });
 }
 

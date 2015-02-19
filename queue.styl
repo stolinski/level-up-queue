@@ -8,6 +8,8 @@ red = #e74c3c
 drawer-height = 275px
 
 med = 600px
+lar = 800px
+
 
 neg(val)
     val * -1
@@ -41,7 +43,6 @@ body
         path
             fill red
 
-
 .wrapper
     transition all 0.2s ease
     +above(med)
@@ -57,8 +58,6 @@ body
     background white
     color bg
     box-shadow 0 -2px 4px rgba(black, 0.5) inset
-    input[type=submit]
-        margin-top 30px
     +above(med)
         position static
         display flex
@@ -81,7 +80,7 @@ nav
         margin 0
         width 100%
         text-align center
-    +above(med)
+    +above(lar)
         padding 20px
         display block
         select
@@ -129,7 +128,7 @@ input[type="checkbox"]
         content: url('/done.svg')
         position: absolute;
         left: 12px;
-        top: 6px;
+        top: -11px;
     & + label
         position relative
         &:before
@@ -143,8 +142,12 @@ input[type="checkbox"]
             vertical-align: middle;
             border: 4px solid white;
             margin-left: 1rem;
-
-
+    +above(med)
+        &:checked + label:after
+            top: 2px;
+    +above(lar)
+        &:checked + label:after
+            top: 6px;
 
 select
     -webkit-appearance none
@@ -157,7 +160,7 @@ select
     padding 20px
     position relative
     min-height 300px
-    +above(med)
+    +above(lar)
         padding 0
         padding-right 90px
 
@@ -176,22 +179,25 @@ select
 
 
 .course-details
-    animation: play 2s;
+    animation: play 1.5s;
+    text-align center
     h2
         text-transform uppercase
-        text-align center
     p
         font-size 1.6rem
-    +above(800px)
+    +above(lar)
         float left
+        text-align left
         margin-left 20px
 
 
 @keyframes play
     from
         opacity 0
+        transform translateX(-100px)
     to
         opacity 1
+        transform translateX(0)
 
 
 #items
@@ -242,7 +248,7 @@ select
     +above(med)
         li
             font-size 2rem
-    +above(800px)
+    +above(lar)
         li
             font-size 3rem
     +above(1000px)
