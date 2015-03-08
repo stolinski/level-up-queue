@@ -9,4 +9,5 @@ Router.map(function() {
             this.next();
         }
     });
+    this.route('admin', {path: '/admin'});
 });

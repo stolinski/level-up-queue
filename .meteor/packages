@@ -10,7 +10,6 @@ mrt:jquery-ui
 cryptoquick:stylus-multi
 accounts-password
 accounts-ui
-xolvio:cucumber
 iron:router
 appcache
 fastclick

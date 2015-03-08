@@ -22,11 +22,11 @@ if (Meteor.isServer) {
 
     });
 
-    Meteor.publish('course', function () {
+    Meteor.publish('course', function() {
         return Course.find();
     });
 
-    Meteor.publish('video', function () {
+    Meteor.publish('video', function() {
         return Video.find();
     });
 }

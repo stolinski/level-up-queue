@@ -1,5 +1,7 @@
 @import 'nib'
 
+@import 'styl/_mixins'
+
 bg = #111
 white = #ecf0f1
 red = #e74c3c
@@ -10,11 +12,6 @@ drawer-height = 275px
 med = 600px
 lar = 800px
 
-neg(val)
-    val * -1
-
-roboto()
-  font-family 'Roboto', sans-serif
 
 html
   box-sizing border-box
@@ -26,14 +23,59 @@ html
     height 100%
 
 body
-    background bg
+    background url(/stardustd.png) bg
     color white
     padding 0
     margin 0
     min-height 100%
     roboto()
 
+.wrapper
+    &.open
+        .forms
+            transform translateX(0)
+
+// Offscreen forms
+#form-toggle
+    z-index 10
+    position fixed
+    left 8px
+    bottom 80px
+    width 60px
+    height @width
+    transform rotate(-90deg)
+    transition all 0.2s ease
+    path
+        fill white
+
+.forms
+    display none
+    position fixed
+    padding 20px
+    height drawer-height
+    background rgba(white, 0.98)
+    color bg
+    transition all 0.3s ease-out
+    height 100%
+    transform translateX(-100%)
+    box-shadow 0 -2px 4px rgba(black, 0.5)
+    z-index 100
+    +above(med)
+        display block
+
+.forms-close
+    position absolute
+    right 5%
+    font-size 32px
+    transform scale3d(1, 0.8, 1)
+    top 1%
+
+.new-course
+    margin-bottom 20px
+    margin-right 60px
+
 .edit-toggle
+    z-index 10
     position fixed
     bottom 10px
     left 10px
@@ -46,29 +88,8 @@ body
         path
             fill red
 
-// .wrapper
-//     transition all 0.2s ease
-//     +above(med)
-//         transform translateY(neg(drawer-height))
-//         &.open
-//             transform translateY(0)
 
-.forms
-    display none
-    position fixed
-    padding 20px
-    height drawer-height
-    background white
-    color bg
-    box-shadow 0 -2px 4px rgba(black, 0.5) inset
-    +above(med)
-        display flex
-        display none
-
-.new-course
-    margin-bottom 20px
-    margin-right 60px
-
+// Navigation aka the Courses List
 nav
     ul
         display none
@@ -121,36 +142,43 @@ input[type=text], select
     border none
     border-bottom 2px solid white - 40
     margin-right 20px
-    margin-bottom: 20px;
+    margin-bottom: 20px
 
 input[type="checkbox"]
     display none
-    &:checked + label:after
-        display: block;
-        cursor pointer
-        content: url('/done.svg')
-        position: absolute;
-        left: 12px;
-        top: -11px;
     & + label
         position relative
         &:before
             cursor pointer
-            content: '';
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            position: relative;
-            border-radius: 0%;
-            vertical-align: middle;
-            border: 4px solid white;
-            margin-left: 1rem;
-    +above(med)
-        &:checked + label:after
-            top: 2px;
-    +above(lar)
-        &:checked + label:after
-            top: 6px;
+            content ''
+            display inline-block
+            width 40px
+            height 40px
+            position relative
+            border-radius 0%
+            vertical-align middle
+            border 4px solid white
+            margin-left 1rem
+
+.check
+    position absolute
+    right 2px
+    top 27px
+    width 35px
+
+.check path
+    stroke white
+    stroke-width 1px
+    fill transparent
+    stroke-dasharray 99.47578430175781
+    stroke-dashoffset -99.47578430175781
+    transition stroke-dashoffset 0.8s ease 0.2s, fill 0.2s ease
+
+.check.checked path
+    stroke-dashoffset 0
+    fill #fff
+    transition stroke-dashoffset 0.8s ease, fill 0.2s ease 0.8s
+
 
 select
     -webkit-appearance none
@@ -167,22 +195,8 @@ select
         padding 0
         padding-right 90px
 
-#form-toggle
-    position absolute
-    right 20px
-    top @right
-    width 60px
-    height @width
-    transition all 0.2s ease
-    path
-        fill white
-
-.open #form-toggle
-    transform rotate(180deg)
-
-
 .course-details
-    animation: play 1.5s;
+    animation: play 1.5s
     text-align center
     h2
         text-transform uppercase
@@ -209,11 +223,13 @@ select
     padding 0
     position fixed
     overflow-y scroll
-    top 100px
     bottom 0
+    top 180px
+    left 40px
     right 40px
     li
         font-size 1rem
+        position relative
         .drag
             overflow hidden
             position relative
@@ -223,13 +239,13 @@ select
             cursor grab
             cursor -webkit-grab
             cursor -moz-grab
-        svg
-            position absolute
-            width 40px
-            height @width
-            right -100%
-            transition all 0.2s ease
-            opacity 0
+            svg
+                position absolute
+                width 40px
+                height @width
+                right -100%
+                transition all 0.2s ease
+                opacity 0
         .title
             position relative
             transition all 0.6s ease
@@ -250,13 +266,15 @@ select
                     width 100%
     &:hover
         li
-            svg
-                right 0
-                opacity 1
+            .drag
+                svg
+                    right 0
+                    opacity 1
     +above(med)
         li
             font-size 2rem
     +above(lar)
+        top 100px
         li
             font-size 3rem
     +above(1000px)
@@ -279,13 +297,9 @@ select
     top -8px
 
 
-// hide login
-// #login-buttons
-//     display none
-// .login-buttons-dropdown-align-
-//     position: absolute;
-//     bottom: 0;
-//     right: 20px;
+hide login
+#login-buttons
+    display none
 
 
 #velocity-status-widget
@@ -296,3 +310,7 @@ select
         height 15px
         width 15px
         margin-left 32px
+
+
+
+

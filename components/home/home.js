@@ -65,10 +65,14 @@ if (Meteor.isClient) {
         'change #course-menu': function(event) {
             var courseChange = Course.findOne({title: event.target.value});
             Session.set('current', courseChange);
+        },
+        'click .forms-close': function() {
+            Session.set('forms', '');
         }
     });
 
     Template.home.rendered = function() {
+
         this.$('#items').sortable({
             axis: 'y',
             stop: function(e, ui) {;
