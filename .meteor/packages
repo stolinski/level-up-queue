@@ -13,3 +13,4 @@ accounts-ui
 iron:router
 appcache
 fastclick
+percolate:momentum

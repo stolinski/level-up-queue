@@ -103,5 +103,6 @@ if (Meteor.isClient) {
                 Meteor.call('updateVideoRank', Blaze.getData(el)._id, newRank);
             }
         });
+      
     }
 }

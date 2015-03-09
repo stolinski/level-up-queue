@@ -6,7 +6,6 @@ if (Meteor.isClient) {
     Meteor.subscribe('video');
 
     Meteor.startup(function() {
-        Session.set('current', Course.findOne());
         Session.set('forms', '');
         Session.set('editMode', false);
     });
