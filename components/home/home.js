@@ -72,6 +72,10 @@ if (Meteor.isClient) {
     });
 
     Template.home.rendered = function() {
+        var $item = $(this.find('.courses'));
+        Meteor.defer(function() {
+            $item.removeClass('loading');
+        });
 
         this.$('#items').sortable({
             axis: 'y',

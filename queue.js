@@ -10,10 +10,13 @@ if (Meteor.isClient) {
         Session.set('forms', '');
         Session.set('editMode', false);
     });
-
-    Accounts.config({
-        forbidClientAccountCreation : true
+    Accounts.ui.config({
+        passwordSignupFields: 'USERNAME_ONLY'
     });
+
+    // Accounts.config({
+    //     forbidClientAccountCreation : true
+    // });
 }
 
 // Meteor Server
