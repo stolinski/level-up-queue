@@ -91,9 +91,7 @@ body
 
 // Navigation aka the Courses List
 .courses
-    opacity 1
-    transition all 2s ease
-    &.loading
+    &.loading ul
         opacity 0
         transition all 2s ease
         transform translateY(-80%)
@@ -102,6 +100,8 @@ body
         margin 0
         padding 0
         list-style none
+        opacity 1
+        transition all 2s ease
         clearfix()
         li
             float left
