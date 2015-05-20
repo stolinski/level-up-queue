@@ -5,7 +5,12 @@ if (Meteor.isClient) {
             return Course.find();
         },
         videos: function() {
-            return Video.find({course: Session.get('current').title}, {sort: {course: 1, order: 1}});
+            try {
+                return Video.find({course: Session.get('current').title}, {sort: {course: 1, order: 1}});
+            }
+            catch(err) {
+                return;
+            }
         },
         inCourse: function() {
             return Video.find({course: Session.get('current').title}).count();
@@ -79,30 +84,21 @@ if (Meteor.isClient) {
 
         this.$('#items').sortable({
             axis: 'y',
-            stop: function(e, ui) {;
+            stop: function(e, ui) {
                 el = ui.item.get(0)
                 before = ui.item.prev().get(0)
                 after = ui.item.next().get(0)
-                    // Here is the part that blew my mind!
-                    //  Blaze.getData takes as a parameter an html element
-                    //    and will return the data context that was bound when
-                    //    that html element was rendered!
+
                 if (!before) {
-                      //if it was dragged into the first position grab the
-                      // next element's data context and subtract one from the rank
                     newRank = 1;
                 } else if (!after) {
-                      //if it was dragged into the last position grab the
-                      //  previous element's data context and add one to the rank
                     newRank = Blaze.getData(before).order + 1
                 } else {
-                      //else take the average of the two ranks of the previous
-                      // and next elements
                     newRank = (Blaze.getData(after).order + Blaze.getData(before).order) / 2
                 }
                 Meteor.call('updateVideoRank', Blaze.getData(el)._id, newRank);
             }
         });
-      
+
     }
 }

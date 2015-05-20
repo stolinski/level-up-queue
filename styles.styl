@@ -229,11 +229,11 @@ select
     position fixed
     overflow-y scroll
     bottom 0
-    top 180px
+    top 80px
     left 40px
     right 40px
     li
-        font-size 1rem
+        font-size 1.6rem
         position relative
         .drag
             overflow hidden
@@ -276,6 +276,7 @@ select
                     right 0
                     opacity 1
     +above(med)
+        top 180px
         li
             font-size 2rem
     +above(lar)
@@ -302,21 +303,9 @@ select
     top -8px
 
 
-hide login
+// hide login
 #login-buttons
     display none
-
-
-#velocity-status-widget
-    background transparent
-    border none
-    .velocity-icon-status
-        border none
-        height 15px
-        width 15px
-        margin-left 32px
-
-
 
 
 .welcome

@@ -23,15 +23,13 @@
                 </ul>
             </nav>
             <main>
-                <div class="course-details animate">
+                <div class="course-details">
 
                     {{#if current}}
-                    {{#momentum plugin='right-to-left'}}
                     <h2>{{current.title}}</h2>
                     <p>
                         {{#if complete}}{{complete}} / {{/if}}{{inCourse}} videos {{#if complete}}completed{{/if}}
                     </p>
-                    {{/momentum}}
                     {{/if}}
 
                 </div>

@@ -10,7 +10,5 @@ cryptoquick:stylus-multi
 accounts-password
 accounts-ui
 iron:router
-appcache
 fastclick
-percolate:momentum
 msavin:mongol
