@@ -1,4 +1,5 @@
 if (Meteor.isClient) {
+    Meteor.subscribe('video');
 
     Template.home.helpers({
         courses: function() {
@@ -26,6 +27,14 @@ if (Meteor.isClient) {
         },
         editMode: function() {
             return Session.get('editMode');
+        },
+
+        dragOptions: function () {
+            return {
+                onEnd: function(event) {
+                    Meteor.call('updateVideoRank', event.data._id, event.newIndex);
+                }
+            };
         }
     });
 
@@ -78,27 +87,10 @@ if (Meteor.isClient) {
 
     Template.home.rendered = function() {
         var $item = $(this.find('.courses'));
+
         Meteor.defer(function() {
             $item.removeClass('loading');
         });
+    };
 
-        this.$('#items').sortable({
-            axis: 'y',
-            stop: function(e, ui) {
-                el = ui.item.get(0)
-                before = ui.item.prev().get(0)
-                after = ui.item.next().get(0)
-
-                if (!before) {
-                    newRank = 1;
-                } else if (!after) {
-                    newRank = Blaze.getData(before).order + 1
-                } else {
-                    newRank = (Blaze.getData(after).order + Blaze.getData(before).order) / 2
-                }
-                Meteor.call('updateVideoRank', Blaze.getData(el)._id, newRank);
-            }
-        });
-
-    }
 }

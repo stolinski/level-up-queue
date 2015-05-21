@@ -35,9 +35,9 @@
                 </div>
                 {{#if videos}}
                 <ul id="items">
-                    {{#each videos}}
+                    {{#sortable items=videos sortField="order" handle=".drag" options=dragOptions}}
                         {{> video}}
-                    {{/each}}
+                    {{/sortable}}
                 </ul>
                 {{else}}
                     <h2 class="welcome">Good Morning</h2>

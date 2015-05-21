@@ -20,8 +20,4 @@ if (Meteor.isServer) {
         forbidClientAccountCreation : true
     });
 
-    Meteor.startup(function() {
-
-    });
-
 }
