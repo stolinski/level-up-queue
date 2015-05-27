@@ -39,32 +39,31 @@
                         {{> video}}
                     {{/sortable}}
                 </ul>
-                {{else}}
-                    <h2 class="welcome">Good Morning</h2>
                 {{/if}}
             </main>
         </div>
     </div>
-    {{> loginButtons}}
+
     <div class="forms {{forms}}">
-            <span class="forms-close">X</span>
-            <form class="new-course">
-                <h3>New Course</h3>
-                <input id="title" class="form-title" type="text" name="title" placeholder="Course Title" required/>
-                <br />
-                <input class="inverted" type="submit" value="Submit">
-            </form>
+        <span class="forms-close">X</span>
+        <form class="new-course">
+            <h3>New Course</h3>
+            <input id="title" class="form-title" type="text" name="title" placeholder="Course Title" required/>
+            <br />
+            <input class="inverted" type="submit" value="Submit">
+        </form>
 
-            <form class="new-video">
-                <h3>New Video</h3>
-                <input id="title" class="form-title" type="text" name="title" placeholder="Video Title" required/><br />
-                <select name="course" id="course">
-                    {{#each courses}}
-                        <option value="{{title}}">{{title}}</option>
-                    {{/each}}
-                </select><br />
-                <input class="inverted" type="submit" value="Submit">
-            </form>
+        <form class="new-video">
+            <h3>New Video</h3>
+            <input id="title" class="form-title" type="text" name="title" placeholder="Video Title" required/><br />
+            <select name="course" id="course">
+                {{#each courses}}
+                    <option value="{{title}}">{{title}}</option>
+                {{/each}}
+            </select><br />
+            <input class="inverted" type="submit" value="Submit">
+        </form>
 
-        </div>
+        {{> loginButtons}}
+    </div>
 </template>

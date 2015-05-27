@@ -11,6 +11,7 @@ if (Meteor.isClient) {
         passwordSignupFields: 'USERNAME_ONLY'
     });
 
+
 }
 
 // Meteor Server
